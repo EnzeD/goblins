@@ -1,73 +1,79 @@
 # Goblins
 
-A tiny Codex skill that releases a small animated 2D desktop goblin onto your screen.
+Summon one tiny desktop goblin. It roams. It loiters. It has no calendar invite.
 
-It wanders. It stares. It has somewhere to be, probably.
-
-## What It Does
-
-- Installs as a standalone Codex skill named `goblins`.
-- Starts a transparent, always-on-top desktop companion.
-- Uses a native Swift/Cocoa overlay on macOS.
-- Falls back to a Python/Tk runtime outside macOS.
-- Supports optional generated sprite sheets for a fancier character.
-- Keeps runtime state in `~/.codex/goblins/`.
-
-## Install
-
-From this repo:
-
-```bash
-ln -s "$(pwd)/goblins" ~/.codex/skills/goblins
-```
-
-Restart Codex so the skill list reloads.
-
-Then invoke:
+This is a standalone Codex skill that launches a little animated 2D companion onto your desktop when you invoke:
 
 ```text
 /goblins
 ```
 
-or ask Codex:
+No Electron tavern. No npm cauldron. Just a small bundled runtime and one suspicious little guy.
+
+## Goblin Capabilities
+
+- Skitters around your desktop in a transparent always-on-top window.
+- Ignores your mouse, as all respectable desktop goblins should.
+- Uses a native Swift/Cocoa overlay on macOS.
+- Falls back to Python/Tk outside macOS, if your Python has Tkinter.
+- Can wear a custom generated sprite sheet if you give it one.
+- Stores its tiny administrative paperwork in `~/.codex/goblins/`.
+
+## Install The Goblin
+
+Clone the repo, then from the repo root:
+
+```bash
+ln -s "$(pwd)/goblins" ~/.codex/skills/goblins
+```
+
+Restart Codex so it notices the new resident.
+
+Then type:
+
+```text
+/goblins
+```
+
+or use the formal incantation:
 
 ```text
 spawn a goblin on my desktop
 ```
 
-## Manual Commands
+## Goblin Wrangler Commands
 
-Start:
+Start the goblin:
 
 ```bash
 cd goblins
 python3 scripts/goblin_desktop.py start
 ```
 
-Stop:
+Stop the goblin:
 
 ```bash
 cd goblins
 python3 scripts/goblin_desktop.py stop
 ```
 
-Status:
+Ask whether the goblin is currently employed:
 
 ```bash
 cd goblins
 python3 scripts/goblin_desktop.py status
 ```
 
-Restart:
+Restart the goblin after it has reconsidered its life choices:
 
 ```bash
 cd goblins
 python3 scripts/goblin_desktop.py restart
 ```
 
-## Custom Sprite Sheet
+## Custom Goblin Attire
 
-The runtime prefers a PNG sprite sheet if one has been installed:
+The runtime will use a PNG sprite sheet if you install one:
 
 ```bash
 cd goblins
@@ -75,14 +81,14 @@ python3 scripts/goblin_desktop.py spritesheet /path/to/goblin_spritesheet.png
 python3 scripts/goblin_desktop.py restart
 ```
 
-Sprite sheet format:
+Sprite sheet rules, because even goblins need boundaries:
 
 - PNG
 - 128x128 frames
 - Regular grid
 - One horizontal row of 8 frames is ideal
 
-If no sprite sheet exists, the runtime draws a procedural character.
+If no sprite sheet is installed, the runtime draws its own procedural goblin. This is not a punishment. It is a lifestyle.
 
 ## Requirements
 
@@ -96,9 +102,9 @@ Other platforms:
 - `python3`
 - Tkinter support in the local Python build
 
-No npm install, Electron app, or PyPI package is required.
+No npm install, Electron app, or PyPI package is required. The goblin travels light.
 
-## Repo Layout
+## Burrow Layout
 
 ```text
 goblins/
@@ -111,8 +117,8 @@ goblins/
     └── goblin_desktop.py
 ```
 
-## Notes
+## Fine Print
 
-This is intentionally small and silly. The skill owns the Codex workflow; the bundled runtime owns the actual desktop animation.
+This project is intentionally small, silly, and mildly alarming. The Codex skill handles the invocation workflow; the bundled runtime handles the desktop mischief.
 
-If it appears in the wrong place, behaving suspiciously, or making strong eye contact, that is normal desktop companion behavior.
+If the goblin appears in the wrong place, stares at your draft PR, or drifts across an important button, that is expected behavior.
