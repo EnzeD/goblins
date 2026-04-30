@@ -1,0 +1,4 @@
+interface:
+  display_name: "Goblins"
+  short_description: "Spawn a roaming desktop goblin."
+  default_prompt: "Use $goblins to spawn an animated 2D goblin on my desktop."
