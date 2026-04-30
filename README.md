@@ -21,13 +21,19 @@ No Electron tavern. No npm cauldron. Just a small bundled runtime and one suspic
 
 ## Install The Goblin
 
-Clone the repo, then from the repo root:
+Install it from the public repo:
+
+```bash
+npx skills add enzed/goblins
+```
+
+Restart Codex so it notices the new resident.
+
+For local development, clone the repo and symlink the skill folder:
 
 ```bash
 ln -s "$(pwd)/goblins" ~/.codex/skills/goblins
 ```
-
-Restart Codex so it notices the new resident.
 
 Then type:
 
