@@ -49,6 +49,30 @@ def process_alive(pid: int | None) -> bool:
     return True
 
 
+def process_command(pid: int) -> str | None:
+    result = subprocess.run(
+        ["ps", "-p", str(pid), "-o", "command="],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return None
+    return result.stdout.strip() or None
+
+
+def managed_process_alive(pid: int | None) -> bool:
+    if not process_alive(pid):
+        return False
+    assert pid is not None
+    command = process_command(pid)
+    if command is None:
+        return False
+
+    script = str(Path(__file__).resolve())
+    swift_binary = str(SWIFT_BINARY)
+    return swift_binary in command or (script in command and " run" in command)
+
+
 def write_pid(pid: int) -> None:
     ensure_app_dir()
     PID_FILE.write_text(f"{pid}\n", encoding="utf-8")
@@ -99,9 +123,10 @@ def runtime_command() -> list[str] | None:
 def start_background() -> int:
     ensure_app_dir()
     current = read_pid()
-    if process_alive(current):
+    if managed_process_alive(current):
         print(f"goblin already running with pid {current}")
         return 0
+    clear_pid()
 
     command = runtime_command()
     if command is None:
@@ -124,7 +149,7 @@ def start_background() -> int:
 
 def stop_background() -> int:
     pid = read_pid()
-    if not process_alive(pid):
+    if not managed_process_alive(pid):
         clear_pid()
         print("goblin is not running")
         return 0
@@ -150,7 +175,7 @@ def stop_background() -> int:
 
 def status() -> int:
     pid = read_pid()
-    if process_alive(pid):
+    if managed_process_alive(pid):
         print(f"goblin running with pid {pid}")
     else:
         clear_pid()
